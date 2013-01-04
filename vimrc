@@ -7,8 +7,12 @@ filetype plugin on
 au BufNewFile,BufRead *.as set filetype=actionscript
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
-colorscheme solarized
-set background=dark
+if !empty($CUSTOM)
+    colorscheme solarized
+    set background=dark
+else
+    colorscheme vividchalk
+endif
 for prefix in ['n', 'v']
 	for key in ['<Up>', '<Down>', '<Left>', '<Right>']
 		exe prefix . "noremap " . key . " <Nop>"

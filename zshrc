@@ -6,8 +6,12 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # Nice themes: tonotdo,sorin,pygmalion,norm,nicoulaj,muse,minimal,lambda,bira.arrow,aseem
-ZSH_THEME="agnoster"
-
+if [ "$CUSTOM" = "true" ]
+then
+    ZSH_THEME="agnoster"
+else
+    ZSH_THEME="gallois"
+fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
