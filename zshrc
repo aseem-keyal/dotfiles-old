@@ -10,7 +10,7 @@ if [ "$CUSTOM" = "true" ]
 then
     ZSH_THEME="agnoster"
 else
-    ZSH_THEME="gallois"
+    ZSH_THEME="af-magic"
 fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -34,7 +34,7 @@ fi
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
