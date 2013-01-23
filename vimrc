@@ -1,69 +1,58 @@
-set nu
+" Aseem's Vimrc file
+" ============================================================================
+"
+" Automaticly reload config ----------------------------------------------- {{{
+
+autocmd! bufwritepost vimrc source %
+
+" }}}
+
+" Setup ------------------------------------------------------------------- {{{
+
+filetype off
 call pathogen#infect()
 call pathogen#helptags()
-syntax on
-filetype on
-filetype plugin on
-au BufNewFile,BufRead *.as set filetype=actionscript
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-if !empty($CUSTOM)
-    colorscheme solarized
-    set background=dark
-else
-    colorscheme vividchalk
-endif
-for prefix in ['n', 'v']
-	for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-		exe prefix . "noremap " . key . " <Nop>"
-	endfor
-endfor
-if &term =~ "xterm"
- set t_Co=256
- if has("terminfo")
-   let &t_Sf=nr2char(27).'[3%p1%dm'
-   let &t_Sb=nr2char(27).'[4%p1%dm'
- else
-   let &t_Sf=nr2char(27).'[3%dm'
-   let &t_Sb=nr2char(27).'[4%dm'
- endif
-endif
+filetype plugin indent on
 set nocompatible
+
+" }}}
+
+"  Basic Options --------------------------------------------------------- {{{
+
 set encoding=utf-8
-set laststatus=2
-set t_Co=256
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'solarized256'
+set modelines=0
 set autoindent
-map <MiddleMouse> <Nop>
-" Everything below is taken from python apac
-set pastetoggle=<F2>
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
-let mapleader = ","
-noremap <Leader>e :quit<CR>  " Quit current window
-noremap <Leader>E :qa!<CR>   " Quit all windows
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-vnoremap <Leader>s :sort<CR>
-vnoremap < <gv  " better indentation
-vnoremap > >gv  " better indentation
-set number  " show line numbers
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
-vmap Q gq
-nmap Q gqap
+set showmode
+set showcmd
+set hidden
+set visualbell
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set relativenumber
+set laststatus=2
+set history=1000
+set undofile
+set undoreload=10000
+set cpoptions+=J
+set list
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set shell=/bin/bash
+set lazyredraw
+set matchtime=3
+set showbreak=↪
+set splitbelow
+set splitright
+set fillchars=diff:⣿
+set ttimeout
+set notimeout
+set nottimeout
+set autowrite
+set shiftround
+set autoread
+set title
+set dictionary=/usr/share/dict/words
 set history=700
 set undolevels=700
 set tabstop=4
@@ -75,7 +64,106 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+let mapleader = ","
+set tw=79 
+set fo-=t
+set colorcolumn=80
+
+" }}}
+
+" Movement ---------------------------------------------------------------- {{{
+
+for prefix in ['n', 'v', 'i']
+	for key in ['<Up>', '<Down>', '<Left>', '<Right>']
+		exe prefix . "noremap " . key . " <Nop>"
+	endfor
+endfor
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+
+" }}}
+
+" Editing ----------------------------------------------------------------- {{{
+
+vnoremap < <gv  " better indentation
+vnoremap > >gv  " better indentation
+vnoremap <Leader>s :sort<CR>
+
+" }}}
+
+" Saving and Quiting ------------------------------------------------------ {{{
+
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+noremap <Leader>e :quit<CR>
+noremap <Leader>E :qa!<CR>
+
+" }}}
+
+" Colorscheme ------------------------------------------------------------- {{{
+
+syntax on
+if !empty($CUSTOM)
+    colorscheme solarized
+    set background=dark
+else
+    colorscheme molokai
+endif
+if &term =~ "xterm"
+ set t_Co=256
+ if has("terminfo")
+   let &t_Sf=nr2char(27).'[3%p1%dm'
+   let &t_Sb=nr2char(27).'[4%p1%dm'
+ else
+   let &t_Sf=nr2char(27).'[3%dm'
+   let &t_Sb=nr2char(27).'[4%dm'
+ endif
+endif
+set t_Co=256
+
+" }}}
+
+" Folding ----------------------------------------------------------------- {{{
+
+set foldlevelstart=0
+nnoremap <Space> za
+vnoremap <Space> za
+nnoremap <leader>z zMzvzz
+set foldmethod=marker
+set nofoldenable
+
+" }}}
+
+" Trailing Whitespace ----------------------------------------------------- {{{
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+" }}}
+
+" Powerline --------------------------------------------------------------- {{{
+
+let g:Powerline_symbols = 'fancy'
+
+" }}}
+
+" Searching --------------------------------------------------------------- {{{
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+" }}}
+
+" Ctrl-P ------------------------------------------------------------------ {{{
+
 let g:ctrlp_max_height = 30
+
+" }}}
+
+" Python ------------------------------------------------------------------ {{{
+
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
@@ -88,6 +176,16 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_builtin_objs = 0
 let g:pymode_syntax_builtin_funcs = 0
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" }}}
+
+" Actionscript ------------------------------------------------------------ {{{
+
+au BufNewFile,BufRead *.as set filetype=actionscript
+
+" }}}
+
+" Completion -------------------------------------------------------------- {{{
 set completeopt=longest,menuone
 function! OmniPopup(action)
     if pumvisible()
@@ -102,4 +200,4 @@ endfunction
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-set nofoldenable
+" }}}

@@ -2,6 +2,10 @@ dotfiles
 ========
 
 An assortment of my configuration files for various utilities
+
+Install
+=======
+Use "git --recursive clone" in order to pull down submodules as well, then modify and run install.sh
 <table cellspacing="0">
     <tr>
         <th>File</th>
