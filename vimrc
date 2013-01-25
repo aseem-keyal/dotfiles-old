@@ -36,7 +36,7 @@ set history=1000
 set undofile
 set undoreload=10000
 set cpoptions+=J
-set shell=/bin/bash
+set shell=/bin/zsh
 set lazyredraw
 set matchtime=3
 set showbreak=↪
@@ -86,6 +86,7 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+let g:EasyMotion_grouping = 2
 
 " }}}
 
@@ -94,7 +95,7 @@ map <Leader>m <esc>:tabnext<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 vnoremap <Leader>s :sort<CR>
-nmap ; :
+nnoremap ; :<c-u>call SkyBison("")<cr>
 inoremap jk <Esc>
 inoremap kj <Esc>
 
@@ -119,12 +120,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Colorscheme ------------------------------------------------------------- {{{
 
 syntax on
-if !empty($CUSTOM)
-    colorscheme solarized
-    set background=dark
-else
-    colorscheme molokai
-endif
+colorscheme molokai
 if &term =~ "xterm"
  set t_Co=256
  if has("terminfo")
@@ -136,6 +132,7 @@ if &term =~ "xterm"
  endif
 endif
 set t_Co=256
+highlight ColorColumn ctermbg=8
 
 " }}}
 
