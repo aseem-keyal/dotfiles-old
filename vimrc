@@ -1,6 +1,6 @@
 " Aseem's Vimrc file
 " ============================================================================
-"
+
 " Automaticly reload config ----------------------------------------------- {{{
 
 autocmd! bufwritepost vimrc source %
@@ -30,14 +30,12 @@ set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-set relativenumber
+set number
 set laststatus=2
 set history=1000
 set undofile
 set undoreload=10000
 set cpoptions+=J
-set list
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set shell=/bin/bash
 set lazyredraw
 set matchtime=3
@@ -50,6 +48,10 @@ set notimeout
 set nottimeout
 set autowrite
 set shiftround
+set undodir=~/.vim/tmp/undo//
+set backupdir=~/.vim/tmp/backup//
+set directory=~/.vim/tmp/swap//
+set backup
 set autoread
 set title
 set dictionary=/usr/share/dict/words
@@ -65,7 +67,7 @@ set incsearch
 set ignorecase
 set smartcase
 let mapleader = ","
-set tw=79 
+set tw=79
 set fo-=t
 set colorcolumn=80
 
@@ -92,16 +94,25 @@ map <Leader>m <esc>:tabnext<CR>
 vnoremap < <gv  " better indentation
 vnoremap > >gv  " better indentation
 vnoremap <Leader>s :sort<CR>
+nmap ; :
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " }}}
 
 " Saving and Quiting ------------------------------------------------------ {{{
 
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
+noremap <Leader>w :update<CR>
 noremap <Leader>e :quit<CR>
 noremap <Leader>E :qa!<CR>
+
+" }}}
+
+" Trailing Whitespace ----------------------------------------------------- {{{
+
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWritePre * :%s/\s\+$//e
 
 " }}}
 
@@ -139,11 +150,6 @@ set nofoldenable
 
 " }}}
 
-" Trailing Whitespace ----------------------------------------------------- {{{
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-" }}}
-
 " Powerline --------------------------------------------------------------- {{{
 
 let g:Powerline_symbols = 'fancy'
@@ -151,9 +157,11 @@ let g:Powerline_symbols = 'fancy'
 " }}}
 
 " Searching --------------------------------------------------------------- {{{
+
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> :nohl<CR>
+
 " }}}
 
 " Ctrl-P ------------------------------------------------------------------ {{{
@@ -186,6 +194,7 @@ au BufNewFile,BufRead *.as set filetype=actionscript
 " }}}
 
 " Completion -------------------------------------------------------------- {{{
+
 set completeopt=longest,menuone
 function! OmniPopup(action)
     if pumvisible()
@@ -200,4 +209,5 @@ endfunction
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
 " }}}
