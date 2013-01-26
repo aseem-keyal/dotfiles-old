@@ -25,7 +25,7 @@ set autoindent
 set showmode
 set showcmd
 set hidden
-set visualbell
+set novisualbell
 set cursorline
 set ttyfast
 set ruler
@@ -48,10 +48,6 @@ set notimeout
 set nottimeout
 set autowrite
 set shiftround
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
-set backup
 set autoread
 set title
 set dictionary=/usr/share/dict/words
