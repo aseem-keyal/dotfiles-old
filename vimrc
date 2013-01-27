@@ -48,10 +48,6 @@ set notimeout
 set nottimeout
 set autowrite
 set shiftround
-set undodir=~/.vim/tmp/undo//
-set backupdir=~/.vim/tmp/backup//
-set directory=~/.vim/tmp/swap//
-set backup
 set autoread
 set title
 set dictionary=/usr/share/dict/words
@@ -70,6 +66,8 @@ let mapleader = ","
 set tw=79
 set fo-=t
 set colorcolumn=80
+set nobackup
+set noswapfile
 
 " }}}
 
