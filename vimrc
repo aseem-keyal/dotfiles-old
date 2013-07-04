@@ -118,7 +118,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Colorscheme ------------------------------------------------------------- {{{
 
 syntax on
-colorscheme molokai
+colorscheme default
 if &term =~ "xterm"
  set t_Co=256
  if has("terminfo")
@@ -185,6 +185,13 @@ map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 " Actionscript ------------------------------------------------------------ {{{
 
 au BufNewFile,BufRead *.as set filetype=actionscript
+
+" }}}
+
+
+" CoffeeScript -------------------------------------------------------------- {{{
+
+au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
 
 " }}}
 
